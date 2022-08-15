@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -27,9 +26,6 @@ class BaseHttpClient {
   }
 }
 
-final JsonDecoder decoder = JsonDecoder();
-final JsonEncoder encoder = JsonEncoder.withIndent('  ');
-
 final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
   onRequest: (RequestOptions options, RequestInterceptorHandler requestInterceptorHandler) async {
     debugPrint("${options.method}: ${options.path},"
@@ -39,18 +35,12 @@ final InterceptorsWrapper defaultInterceptor = InterceptorsWrapper(
     requestInterceptorHandler.next(options);
   },
   onResponse: (Response response, ResponseInterceptorHandler responseInterceptorHandler) async {
-    //prettyPrintJson(response.data);
     responseInterceptorHandler.next(response);
   },
   onError: (DioError error, ErrorInterceptorHandler errorInterceptorHandler) async {
     errorInterceptorHandler.reject(error);
   },
 );
-
-void prettyPrintJson(dynamic input) {
-  var prettyString = encoder.convert(input);
-  prettyString.split('\n').forEach((element) => print(element));
-}
 
 String getLastIndexString(String? data, [int length = 2]) {
   if (data == null || data == "null") return "null";
