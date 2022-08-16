@@ -5,7 +5,7 @@ class MenuResponse {
   final String? name;
   final String? image;
   final String? description;
-  final double? price;
+  final num? price;
   final dynamic category;
   final int? v;
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 
 class AppUtils {
@@ -16,6 +17,26 @@ class AppUtils {
     }
 
     return TokenPayload.fromMap(payloadMap);
+  }
+
+  static Future<DateTime?> onPickDOB(
+    DateTime? lastDate,
+    TextEditingController controllerTC,
+    BuildContext context,
+  ) async {
+    final DateTime? selectedDate = await showDatePicker(
+        context: context,
+        initialDate: lastDate ?? DateTime.now(),
+        firstDate: DateTime.parse("1999-01-01"),
+        lastDate: DateTime.now(),
+        builder: (_, Widget? child) {
+          return child!;
+        });
+    if (selectedDate == null) return null;
+    controllerTC.text = selectedDate.formatDate(
+      format: "dd/MM/yyyy",
+    );
+    return selectedDate;
   }
 }
 

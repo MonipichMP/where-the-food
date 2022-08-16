@@ -49,10 +49,10 @@ class BaseApiService {
         data: data,
       );
 
-      if (response.data[STATUS_FIELD] == 1 || response.data[STATUS_FIELD] == true) {
+      if (response.data != null) {
         return onSuccess(response);
       } else {
-        throw ServerResponseException(response.data[MESSAGE_FIELD]);
+        throw ServerResponseException(response.data);
       }
     } on DioError catch (exception) {
       throw _onDioError(exception);

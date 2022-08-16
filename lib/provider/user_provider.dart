@@ -1,18 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
+import 'package:sura_flutter/sura_flutter.dart';
+import 'package:where_the_food/api_service/index.dart';
 import 'package:where_the_food/constant/local_storage_service.dart';
+import 'package:where_the_food/model/response/login_response.dart';
 
 class UserProvider extends ChangeNotifier {
   bool _isLoggedIn = false;
-  // AsyncSubjectManager<AccountAuthModel> managerAuth = AsyncSubjectManager();
 
   //Public field
   bool get isLoggedIn => _isLoggedIn;
 
   static UserProvider getProvider(BuildContext context, [bool listen = false]) =>
       Provider.of<UserProvider>(context, listen: listen);
-  // AsyncSubjectManager<AccountInfo> userSubjectManager = AsyncSubjectManager();
+  AsyncSubjectManager<AuthResponse> managerLogin = AsyncSubjectManager();
 
   void setLoginStatus(bool isLoggedIn) {
     LocalStorage.saveLoginStatus(isLoggedIn);
@@ -20,36 +22,36 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Future getUserInfo({bool throwError = false, bool reloading = false}) async {
-  //   await userSubjectManager.asyncOperation(
-  //     () => userApiService.fetchAccountInfo(),
-  //     reloading: reloading,
-  //     throwError: throwError,
-  //     onSuccess: (data) {
-  //       return data;
-  //     },
-  //   );
-  // }
-
-  // Future<void> fetchAccountAuth() async {
-  //   await managerAuth.asyncOperation(
-  //     () async {
-  //       return userApiService.fetchAccountAuth();
-  //     },
-  //     onSuccess: (response) {
-  //       return response;
-  //     },
-  //   );
-  // }
+  Future<void> loginUser({
+    bool reloading = false,
+    required String username,
+    required String password,
+  }) async {
+    await managerLogin.asyncOperation(
+      () async {
+        return authApiService.loginUser(
+          username: username,
+          password: password,
+        );
+      },
+      reloading: reloading,
+      onSuccess: (response) {
+        return response;
+      },
+      onError: (response) {
+        debugPrint(response.toString());
+      }
+    );
+  }
 
   void logoutUser() {
-    // userController.addData(null);
     setLoginStatus(false);
+    managerLogin.dispose();
   }
 
   @override
   void dispose() {
     super.dispose();
-    // managerAuth.dispose();
+    managerLogin.dispose();
   }
 }

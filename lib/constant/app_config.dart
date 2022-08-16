@@ -1,5 +1,5 @@
 class AppConfig {
-  static String BASE_URL = "";
+  static String BASE_URL = "http://157.230.245.180:3001";
   static String SHARE_URL = "";
   static String ONE_SIGNAL_APP_ID = "cc6261f3-edac-4f8a-9bd2-36f7a69a60c6";
   static const String BASE_URL_LOCAL = "http://192.168.88.181:3000";

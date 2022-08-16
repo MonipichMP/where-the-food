@@ -6,8 +6,9 @@ import 'package:where_the_food/constant/app_assets.dart';
 import 'package:where_the_food/constant/app_color.dart';
 import 'package:where_the_food/constant/local_storage_service.dart';
 import 'package:where_the_food/constant/style.dart';
-import 'package:where_the_food/pages/root_page.dart';
-import 'package:where_the_food/utils/toast_message_util.dart';
+import 'package:where_the_food/pages/category_page.dart';
+import 'package:where_the_food/provider/user_provider.dart';
+import 'package:where_the_food/service/auth_service.dart';
 import 'package:where_the_food/widgets/custom_stream_handler.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -25,22 +26,12 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
     try {
       await LocalStorage.initSharedPref();
-      // bool isLoggedIn = await LocalStorage.getLoginStatus();
-      bool isLoggedIn = false;
+      bool isLoggedIn = await LocalStorage.getLoginStatus();
       if (isLoggedIn) {
-        // await AuthService.initLocalUserCredential();
-        // UserProvider.getProvider(context).setLoginStatus(true);
-        try {
-          PageNavigator.pushReplacement(context, const RootPage());
-          return true;
-        } catch (e) {
-          toastMessageError(e.toString(), context);
-          return false;
-        }
-      } else {
-        PageNavigator.pushReplacement(context, const RootPage());
-        // PageNavigator.pushReplacement(context, const SignInPage());
+        await AuthService.initLocalUserCredential();
+        UserProvider.getProvider(context).setLoginStatus(true);
       }
+      PageNavigator.pushReplacement(context, const CategoryPage());
     } catch (error) {
       splashController.addError(error);
     }

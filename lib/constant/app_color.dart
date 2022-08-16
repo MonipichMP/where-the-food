@@ -13,8 +13,8 @@ class AppColor {
   static const Color primaryGradient1 = Color(0xFF2C5364);
   static const Color primaryGradient2 = Color(0xFF3C1053);
   static final List<Color> gradientColors = <Color>[
-    primaryGradient1,
-    primaryGradient2,
+    primary,
+    accent,
   ];
 
   //material
