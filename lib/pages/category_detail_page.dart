@@ -9,6 +9,7 @@ import 'package:where_the_food/pages/menu_detail_page.dart';
 import 'package:where_the_food/provider/category_provider.dart';
 import 'package:where_the_food/widgets/appbar_custom.dart';
 import 'package:where_the_food/widgets/custom_stream_handler.dart';
+import 'package:where_the_food/widgets/empty_list_widget.dart';
 
 class CategoryDetailPage extends StatefulWidget {
   final CategoryResponse category;
@@ -115,9 +116,10 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                   ),
                 );
               } else {
-                return Text(
-                  "No Item found.",
-                  style: kSubHeaderStyle.white,
+                return const Center(
+                  child: EmptyListWidget(
+                    title: "Category",
+                  ),
                 );
               }
             },

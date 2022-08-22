@@ -1,11 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:where_the_food/constant/app_color.dart';
 
 class PrimaryButton extends StatelessWidget {
-  final FutureOr<void> onPressed;
+  final Function() onPressed;
   final Widget child;
   final Widget? icon;
   final Widget? endIcon;
@@ -40,7 +38,7 @@ class PrimaryButton extends StatelessWidget {
       endIcon: endIcon,
       fullWidth: fullWidth,
       margin: margin ?? EdgeInsets.zero,
-      onPressed: onPressed as FutureOr<void> Function()?,
+      onPressed: onPressed,
       textColor: textColor ?? Colors.white,
       color: color,
       padding: padding ?? const EdgeInsets.symmetric(vertical: 12, horizontal: 24),

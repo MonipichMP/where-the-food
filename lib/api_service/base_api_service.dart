@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:where_the_food/api_service/http_client.dart';
 import 'package:where_the_food/constant/app_constant.dart';
-import 'package:where_the_food/utils/app_utils.dart';
 
 import 'base_http_exception.dart';
 
@@ -35,7 +34,6 @@ class BaseApiService {
     try {
       final httpOption = Options(method: method, headers: {});
       if (AppConstant.TOKEN != null && AppConstant.TOKEN!.isNotEmpty && requiredToken) {
-        bool expired = AppUtils.parseJwtPayLoad(AppConstant.TOKEN!).isExpired;
         httpOption.headers!['authorization'] = "bearer ${AppConstant.TOKEN}";
       }
       if (customToken != null) {
@@ -80,11 +78,7 @@ DioErrorException _onDioError(DioError exception) {
   } else if (exception.type == DioErrorType.response) {
     ///Error that range from 400-500
     String serverMessage;
-    if (exception.response!.data is Map) {
-      serverMessage = exception.response?.data["message"] ?? ErrorMessage.UNEXPECTED_ERROR;
-    } else {
-      serverMessage = ErrorMessage.UNEXPECTED_ERROR;
-    }
+    serverMessage = exception.response?.data ?? ErrorMessage.UNEXPECTED_ERROR;
     return DioErrorException(serverMessage, code: exception.response!.statusCode);
   }
   throw DioErrorException(ErrorMessage.UNEXPECTED_ERROR);

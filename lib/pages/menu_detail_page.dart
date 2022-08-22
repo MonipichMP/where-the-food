@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:where_the_food/constant/app_color.dart';
 import 'package:where_the_food/constant/app_config.dart';
 import 'package:where_the_food/constant/style.dart';
 import 'package:where_the_food/model/response/menu_response.dart';
+import 'package:where_the_food/pages/sign_in_page.dart';
 import 'package:where_the_food/provider/menu_provider.dart';
+import 'package:where_the_food/provider/order_provider.dart';
+import 'package:where_the_food/provider/user_provider.dart';
+import 'package:where_the_food/utils/toast_message_util.dart';
 import 'package:where_the_food/widgets/appbar_custom.dart';
 import 'package:where_the_food/widgets/custom_stream_handler.dart';
+import 'package:where_the_food/widgets/primary_button.dart';
 
 class MenuDetailPage extends StatefulWidget {
   final String categoryId;
@@ -95,6 +101,30 @@ class _MenuDetailPageState extends State<MenuDetailPage> {
                     Text(
                       "${menu.description}",
                       style: kSubHeaderStyle,
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              PrimaryButton(
+                roundRect: 0,
+                onPressed: () async {
+                  if (UserProvider.getProvider(context).isLoggedIn) {
+                    OrderProvider.getProvider(context).addToOrderList(menu);
+                    toastMessageSuccess("Success added to cart", context);
+                  } else {
+                    PageNavigator.push(context, const SignInPage(isPopBack: true));
+                  }
+                },
+                child: Row(
+                  children: const [
+                    Text(
+                      "Add to Cart",
+                      style: kTitleStyle,
+                    ),
+                    SpaceX(16),
+                    Icon(
+                      FlutterIcons.add_shopping_cart_mdi,
                     ),
                   ],
                 ),

@@ -8,6 +8,7 @@ import 'package:where_the_food/pages/menu_detail_page.dart';
 import 'package:where_the_food/provider/order_provider.dart';
 import 'package:where_the_food/widgets/appbar_custom.dart';
 import 'package:where_the_food/widgets/custom_stream_handler.dart';
+import 'package:where_the_food/widgets/empty_list_widget.dart';
 
 class OrderDetailPage extends StatefulWidget {
   final String orderId;
@@ -124,9 +125,10 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                       ),
                     );
                   } else {
-                    return Text(
-                      "No Item found.",
-                      style: kSubHeaderStyle.white,
+                    return const Center(
+                      child: EmptyListWidget(
+                        title: "Menu",
+                      ),
                     );
                   }
                 },

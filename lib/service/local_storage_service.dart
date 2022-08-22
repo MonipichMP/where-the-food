@@ -9,17 +9,7 @@ class LocalStorage {
   static const String TOKEN_KEY = "key.token";
   static const String LOGIN_KEY = "key.login";
   static const String ID_KEY = "key.id";
-  static const String PLAYER_ID_KEY = "key.player.id";
-  static const String REFRESH_TOKEN_KEY = "key.refresh.token";
-  static const String TOKEN_EXPIRED_DATE = "key.token.expired.date";
-  //SETTING
-  static const String SETTING_AUTO_PLAY = "key.setting.auto.play";
-  static const String THEME_KEY = "key.theme";
-  static const String EMAIL_TOKEN_KEY = "key.email.token";
-  static const String PASSWORD_KEY = "key.password";
-  static const String FORGOT_PASS_EMAIL_TOKEN_KEY =
-      "key.email.token.forgot.pass";
-  static const String PASSWORD_TOKEN_KEY = "key.password.token";
+  static const String CART_KEY = "key.cart";
 
   static Future<void> initSharedPref() async {
     sp = await SharedPreferences.getInstance();

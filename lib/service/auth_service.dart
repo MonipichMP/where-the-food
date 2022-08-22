@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:where_the_food/constant/app_constant.dart';
-import 'package:where_the_food/constant/local_storage_service.dart';
 import 'package:where_the_food/model/response/login_response.dart';
 import 'package:where_the_food/provider/user_provider.dart';
+import 'package:where_the_food/service/local_storage_service.dart';
 
 class AuthService {
   static Future<void> onLoginSuccess(

@@ -37,4 +37,17 @@ class OrderApiService extends BaseApiService {
       },
     );
   }
+
+  Future<OrderResponse> makeOrder({List<String>? items}) async {
+    return onRequest(
+      path: postOrder,
+      method: HttpMethod.POST,
+      data: {
+        "items": items,
+      },
+      onSuccess: (response) {
+        return OrderResponse.fromJson(response.data);
+      },
+    );
+  }
 }

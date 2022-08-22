@@ -4,6 +4,7 @@ import 'package:sura_flutter/sura_flutter.dart';
 import 'package:where_the_food/api_service/index.dart';
 import 'package:where_the_food/constant/app_color.dart';
 import 'package:where_the_food/constant/style.dart';
+import 'package:where_the_food/pages/category_page.dart';
 import 'package:where_the_food/pages/register_page.dart';
 import 'package:where_the_food/service/auth_service.dart';
 import 'package:where_the_food/utils/toast_message_util.dart';
@@ -11,7 +12,8 @@ import 'package:where_the_food/widgets/custom_text_field.dart';
 import 'package:where_the_food/widgets/primary_button.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  final bool isPopBack;
+  const SignInPage({Key? key, this.isPopBack = false}) : super(key: key);
 
   @override
   _SignInPageState createState() => _SignInPageState();
@@ -30,7 +32,11 @@ class _SignInPageState extends State<SignInPage> with SuraFormMixin {
           password: passwordTC.text.trim(),
         );
         await AuthService.onLoginSuccess(context, authResponse);
-        Navigator.of(context).pop(true);
+        if (widget.isPopBack) {
+          PageNavigator.pop(context);
+        } else {
+          PageNavigator.pushReplacement(context, const CategoryPage());
+        }
       } catch (e) {
         debugPrint(e.toString());
         toastMessageError(e.toString(), context);

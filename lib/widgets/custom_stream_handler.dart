@@ -28,7 +28,7 @@ class CustomStreamHandler<T> extends StatelessWidget {
       loading: loading ??
           Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               child: SpinKitFadingFour(
                 color: Theme.of(context).accentColor,
                 size: 32,

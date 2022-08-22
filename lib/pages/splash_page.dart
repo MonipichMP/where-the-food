@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sura_flutter/sura_flutter.dart';
-import 'package:where_the_food/constant/app_assets.dart';
 import 'package:where_the_food/constant/app_color.dart';
-import 'package:where_the_food/constant/local_storage_service.dart';
 import 'package:where_the_food/constant/style.dart';
 import 'package:where_the_food/pages/category_page.dart';
 import 'package:where_the_food/provider/user_provider.dart';
 import 'package:where_the_food/service/auth_service.dart';
+import 'package:where_the_food/service/local_storage_service.dart';
 import 'package:where_the_food/widgets/custom_stream_handler.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -75,18 +73,16 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: SvgPicture.asset(
-                  AppAssets.imgLogo,
-                  height: 100,
-                  width: 100,
-                ),
+              const Icon(
+                FlutterIcons.food_mco,
+                size: 75,
+                color: AppColor.primary,
               ),
               const SpaceY(16),
               Center(
                 child: Text(
                   "Where The Food",
-                  style: kSubtitleStyle.bold,
+                  style: kTitleStyle.bold,
                 ),
               ),
             ],

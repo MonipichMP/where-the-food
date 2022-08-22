@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:where_the_food/api_service/index.dart';
+import 'package:where_the_food/model/response/menu_response.dart';
 import 'package:where_the_food/model/response/order_response.dart';
 
-class OrderProvider {
+class OrderProvider with ChangeNotifier {
   AsyncSubjectManager<List<OrderResponse>> managerList = AsyncSubjectManager();
   AsyncSubjectManager<OrderResponse> managerDetail = AsyncSubjectManager();
   int page = 1;
@@ -37,6 +38,24 @@ class OrderProvider {
         return response;
       },
     );
+  }
+
+  final List<MenuResponse> _myOrderList = [];
+  List<MenuResponse> get myOrderList => _myOrderList;
+
+  void addToOrderList(MenuResponse menu) {
+    _myOrderList.add(menu);
+    notifyListeners();
+  }
+
+  void removeFromOrderList(MenuResponse menu) {
+    _myOrderList.remove(menu);
+    notifyListeners();
+  }
+
+  void clearOrderList() {
+    _myOrderList.clear();
+    notifyListeners();
   }
 
   void dispose() {

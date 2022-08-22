@@ -1,8 +1,6 @@
 class AppConstant {
   static String? TOKEN;
   static String? USER_ID;
-  static String KH_PHONE_CODE = '+855';
-  static String EXCLUDES_QUESTION = "excludes_question";
 
   static void clearData() {
     TOKEN = null;

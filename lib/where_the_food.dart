@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:where_the_food/api_service/http_client.dart';
 import 'package:where_the_food/pages/splash_page.dart';
-import 'package:where_the_food/provider/bottom_navigation_provider.dart';
 import 'package:where_the_food/provider/category_provider.dart';
 import 'package:where_the_food/provider/menu_provider.dart';
 import 'package:where_the_food/provider/order_provider.dart';
@@ -27,10 +26,9 @@ class _WhereTheFoodState extends State<WhereTheFood> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
-        ChangeNotifierProvider(create: (_) => BottomNavigationProvider()),
+        ChangeNotifierProvider(create: (_) => OrderProvider()),
         Provider(create: (_) => CategoryProvider()),
         Provider(create: (_) => MenuProvider()),
-        Provider(create: (_) => OrderProvider()),
       ],
       child: Builder(builder: (context) {
         return MaterialApp(
@@ -38,6 +36,7 @@ class _WhereTheFoodState extends State<WhereTheFood> {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
+          debugShowCheckedModeBanner: false,
           home: const SplashScreenPage(),
         );
       }),

@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:sura_flutter/sura_flutter.dart';
 import 'package:where_the_food/api_service/index.dart';
-import 'package:where_the_food/constant/local_storage_service.dart';
 import 'package:where_the_food/model/response/login_response.dart';
+import 'package:where_the_food/service/local_storage_service.dart';
 
 class UserProvider extends ChangeNotifier {
   bool _isLoggedIn = false;
@@ -40,7 +40,7 @@ class UserProvider extends ChangeNotifier {
       },
       onError: (response) {
         debugPrint(response.toString());
-      }
+      },
     );
   }
 
